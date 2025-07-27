@@ -13,6 +13,12 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # Virtueller Server, auf dem der Job läuft
 
+    # HIER SIND DIE WICHTIGEN NEUEN BERECHTIGUNGEN
+    permissions:
+      contents: write # Benötigt, um Dateien in den gh-pages Branch zu schreiben
+      pages: write    # Benötigt, um GitHub Pages bereitzustellen
+      id-token: write # Für OpenID Connect, oft empfohlen für moderne Workflows
+
     steps:
       # Schritt 1: Code auschecken
       # Dies checkt deinen Repository-Code aus, damit GitHub Actions darauf zugreifen kann
@@ -26,6 +32,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # Benutzt ein von GitHub bereitgestelltes Token
           publish_dir: ./ # Das Verzeichnis, das deployt werden soll ('.': Das gesamte Projektverzeichnis)
-          # Wenn deine statischen Dateien in einem Unterordner wären (z.B. 'dist' oder 'build'),
-          # würdest du publish_dir auf 'dist/' oder 'build/' setzen
-          # force_orphan: true # Kann nützlich sein, um den gh-pages Branch komplett zu überschreiben, Vorsicht damit!
