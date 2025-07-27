@@ -1,0 +1,31 @@
+# Name des Workflows, wird in GitHub Actions angezeigt
+name: Deploy to GitHub Pages
+
+# Wann soll dieser Workflow ausgeführt werden?
+on:
+  push:
+    branches:
+      - main # Der Branch, auf den du pusht (in deinem Fall 'main')
+  workflow_dispatch: # Ermöglicht das manuelle Auslösen des Workflows über die GitHub-UI
+
+# Jobs, die ausgeführt werden sollen
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Virtueller Server, auf dem der Job läuft
+
+    steps:
+      # Schritt 1: Code auschecken
+      # Dies checkt deinen Repository-Code aus, damit GitHub Actions darauf zugreifen kann
+      - name: Checkout code
+        uses: actions/checkout@v4 # Verwendet die offizielle Aktion zum Auschecken des Codes
+
+      # Schritt 2: GitHub Pages-Aktion einrichten und deployen
+      # Dies ist die spezifische Aktion, die deine statischen Dateien auf GitHub Pages bereitstellt
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4 # Eine beliebte Drittanbieter-Aktion für GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Benutzt ein von GitHub bereitgestelltes Token
+          publish_dir: ./ # Das Verzeichnis, das deployt werden soll ('.': Das gesamte Projektverzeichnis)
+          # Wenn deine statischen Dateien in einem Unterordner wären (z.B. 'dist' oder 'build'),
+          # würdest du publish_dir auf 'dist/' oder 'build/' setzen
+          # force_orphan: true # Kann nützlich sein, um den gh-pages Branch komplett zu überschreiben, Vorsicht damit!
