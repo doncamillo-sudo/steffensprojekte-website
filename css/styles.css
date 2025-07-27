@@ -37,19 +37,16 @@ body {
     top: 0;
     z-index: 1000;
 }
-
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .navbar-brand .logo {
-    height: 60px;
+    height: 50px;
     width: auto;
     display: block;
 }
-
 .navbar-nav {
     display: flex;
     align-items: center;
@@ -58,20 +55,17 @@ body {
     justify-content: center;
     gap: 35px;
 }
-
 .nav-item {
     position: relative;
 }
-
 .nav-link {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1em;
     padding: 10px 0;
     transition: color 0.3s ease;
 }
-
 .nav-link::after {
     content: '';
     position: absolute;
@@ -82,28 +76,17 @@ body {
     background-color: var(--brand-orange);
     transition: width 0.3s ease;
 }
-
-.nav-link:hover,
-.nav-link:focus,
-.nav-link.active {
+.nav-link:hover, .nav-link:focus, .nav-link.active {
     color: var(--brand-orange);
 }
-
-.nav-link:hover::after,
-.nav-link:focus::after,
-.nav-link.active::after {
+.nav-link:hover::after, .nav-link:focus::after, .nav-link.active::after {
     width: 100%;
 }
-
 .header-cta {
     display: flex;
     align-items: center;
     gap: 8px;
     white-space: nowrap;
-}
-
-.phone-icon {
-    vertical-align: middle;
 }
 
 /* --- Buttons & General --- */
@@ -113,22 +96,84 @@ body {
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: bold;
+    font-weight: 500;
 }
-
 .btn-primary {
     background-color: var(--brand-orange);
     color: var(--background-light);
     border: 1px solid var(--brand-orange);
 }
-
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:hover, .btn-primary:focus {
     background-color: #e64a00;
     border-color: #e64a00;
 }
 
-/* --- Responsive Design --- */
+/* --- Hero Section --- */
+.hero-section {
+    padding: 20px 0;
+}
+.hero-video-wrapper {
+    display: grid;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.hero-video, .hero-overlay, .hero-content-box {
+    grid-area: 1 / 1;
+}
+.hero-video {
+    width: 100%;
+    height: 100%; /* Wichtig für object-fit */
+    object-fit: cover; /* Stellt sicher, dass das Video den Container füllt */
+    display: block;
+    z-index: 1;
+}
+.hero-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
+    z-index: 2;
+}
+.hero-content-box {
+    align-self: end;
+    z-index: 3;
+    margin: 40px;
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.hero-left {
+    flex: 1 1 70%;
+}
+.hero-right {
+    flex: 1 1 30%;
+}
+.hero-subtitle {
+    display: inline-block;
+    background-color: #FFF0E9;
+    color: #FF5F1F;
+    padding: 5px 12px;
+    font-size: 0.9em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.hero-title {
+    font-size: 2.9em;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+    color: #333;
+}
+.hero-text {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+/* --- RESPONSIVE DESIGN --- */
 .navbar-toggler {
     display: none;
     background: none;
@@ -137,7 +182,6 @@ body {
     padding: 10px;
     z-index: 1001;
 }
-
 .toggler-icon {
     display: block;
     width: 25px;
@@ -147,49 +191,59 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Breakpoint 1: Tablet Landscape (1100px) - NUR die Navigation wird mobil */
 @media (max-width: 1100px) {
-    .navbar-nav {
-        /* Layout & Positionierung */
+    .navbar-nav, .header-cta {
+        display: none;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .main-header .navbar-nav.active {
         display: flex;
         flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        padding: 20px 0;
-        gap: 0;
-
-        /* Optik & Animation */
-        background-color: var(--background-light); /* Weißer Hintergrund */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        opacity: 0;
-        transform: translateY(-10px);
-        visibility: hidden;
-        pointer-events: none;
-        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+        background-color: var(--background-light);
+        padding: 10px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-
-    .navbar-nav.active {
-        opacity: 1;
-        transform: translateY(0);
-        visibility: visible;
-        pointer-events: auto;
-    }
-
-    .nav-item {
+    .main-header .navbar-nav.active .nav-item {
         margin: 10px 0;
         text-align: center;
     }
-    
-    .nav-link::after {
-        bottom: 0;
-    }
+}
 
-    .header-cta {
-        display: none;
+/* Breakpoint 2: Tablet Portrait (992px) - Hero-Box und Video werden mobil */
+@media (max-width: 992px) {
+    .hero-video-wrapper {
+        min-height: 70vh; /* Mindesthöhe für das Video auf Mobilgeräten */
     }
-    
-    .navbar-toggler {
-        display: block;
+    .hero-content-box {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        margin: 20px;
+        padding: 25px;
+        gap: 25px;
+    }
+    .hero-title {
+        font-size: 2.2em;
+    }
+}
+
+/* Breakpoint 3: Phone (576px) */
+@media (max-width: 576px) {
+    .hero-video-wrapper {
+        min-height: 35vh;
+    }
+    .hero-content-box {
+        margin: 0;
+        border-radius: 0;
+    }
+    .hero-title {
+        font-size: 1.8em;
     }
 }
