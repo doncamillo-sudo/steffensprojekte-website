@@ -1,78 +1,195 @@
-* {
+:root {
+    --brand-orange: #FF5F1F;
+    --text-color: #555;
+    --text-color-dark: #333;
+    --background-light: #fff;
+    --max-width: 1280px;
+}
+
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: sans-serif; /* Später an eine schickere Schriftart anpassen */
-    line-height: 1.6;
-    color: #333;
-    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-light);
 }
 
-header {
-    background-color: #fff;
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+    background-color: var(--background-light);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Seitlicher Abstand */
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #000; /* Passend zum minimalistischen Logo */
+.navbar-brand .logo {
+    height: 60px;
+    width: auto;
+    display: block;
 }
 
-nav ul {
-    list-style: none;
+.navbar-nav {
     display: flex;
+    align-items: center;
+    list-style: none;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 35px;
 }
 
-nav ul li a {
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
     text-decoration: none;
-    color: #333;
-    padding: 0.5rem 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 10px 0;
     transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #007bff; /* Beispiel-Akzentfarbe */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--brand-orange);
+    transition: width 0.3s ease;
 }
 
-.contact-info {
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+    color: var(--brand-orange);
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.header-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.phone-icon {
+    vertical-align: middle;
+}
+
+/* --- Buttons & General --- */
+.btn {
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-weight: bold;
 }
 
-#hero {
-    text-align: center;
-    padding: 80px 20px;
-    background-color: #f8f8f8;
-}
-
-#hero h1 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-}
-
-#hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
 .btn-primary {
-    display: inline-block;
-    background-color: #000; /* Passend zum Logo */
-    color: #fff;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    background-color: var(--brand-orange);
+    color: var(--background-light);
+    border: 1px solid var(--brand-orange);
 }
 
-.btn-primary:hover {
-    background-color: #333;
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #e64a00;
+    border-color: #e64a00;
+}
+
+/* --- Responsive Design --- */
+.navbar-toggler {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.toggler-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color-dark);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 1100px) {
+    .navbar-nav {
+        /* Layout & Positionierung */
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 20px 0;
+        gap: 0;
+
+        /* Optik & Animation */
+        background-color: var(--background-light); /* Weißer Hintergrund */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    }
+
+    .navbar-nav.active {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-item {
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .nav-link::after {
+        bottom: 0;
+    }
+
+    .header-cta {
+        display: none;
+    }
+    
+    .navbar-toggler {
+        display: block;
+    }
 }
