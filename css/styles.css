@@ -113,30 +113,42 @@ body {
     padding-top: 20px;
     padding-bottom: 80px;
 }
+.hero-section .container {
+    position: relative;
+}
+
 .hero-video-wrapper {
-    display: grid;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative; /* Wichtig für das Overlay */
+    line-height: 0; /* Verhindert Leerraum unter dem Video */
 }
-.hero-video, .hero-overlay, .hero-content-box {
-    grid-area: 1 / 1;
-}
+
 .hero-video {
     width: 100%;
-    height: 100%; /* Wichtig für object-fit */
-    object-fit: cover; /* Stellt sicher, dass das Video den Container füllt */
+    height: auto;
     display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
     z-index: 1;
 }
-.hero-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
-    z-index: 2;
-}
 .hero-content-box {
-    align-self: end;
-    z-index: 3;
-    margin: 40px;
+    /* Desktop: Absolute Positionierung für den Overlay-Effekt */
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    z-index: 2;
+    
+    margin: 0 auto; /* Zentriert die Box, falls sie schmaler ist */
+    max-width: calc(100% - 80px);
+
+    /* Styling der Box */
     background-color: #fff;
     padding: 30px 40px;
     border-radius: 12px;
@@ -357,9 +369,7 @@ body {
 
 /* Breakpoint 2: Tablet Portrait (992px) - Hero-Box und Video werden mobil */
 @media (max-width: 992px) {
-    .hero-video-wrapper {
-        min-height: 70vh; /* Mindesthöhe für das Video auf Mobilgeräten */
-    }
+    
     .hero-content-box {
         flex-direction: column;
         align-items: flex-start;
@@ -419,20 +429,65 @@ body {
 
 
 
-/* Breakpoint 3: Phone (576px) */
-@media (max-width: 576px) {
+/* Breakpoint 3: Phone (768px) */
+@media (max-width: 768px) {
+    .hero-section .container {
+        position: static; /* Setzt die Positionierung für Mobil zurück */
+    }
+    
     .hero-video-wrapper {
-        min-height: 35vh;
+        margin-bottom: 20px; /* Abstand zwischen Video und Box */
     }
+
     .hero-content-box {
-        margin: 0;
-        border-radius: 0;
+        position: static; /* Box ist jetzt im normalen Layout-Fluss */
+        width: 100%;
+        max-width: 100%;
+        margin: 0; /* Kein spezieller Margin mehr nötig */
+        bottom: auto; left: auto; right: auto; /* Absolute Werte zurücksetzen */
+        
+        /* Layout innerhalb der Box für Mobilgeräte */
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 25px;
     }
+
     .hero-title {
         font-size: 1.8em;
     }
 
     .section-title {
         font-size: 1.8em;
+    }
+
+    .hero-section {
+        padding-bottom: 40px;
+    }
+    
+    .services-section {
+        /* Reduziert den Abstand der Sektion oben und unten */
+        padding: 40px 0;
+    }
+    
+    .tabs-wrapper {
+        /* Reduziert den Abstand zwischen Button-Leiste und Inhalts-Box */
+        gap: 25px;
+    }
+
+    .tab-pane.active {
+        /* Reduziert den Abstand zwischen Bild und Text */
+        gap: 25px; 
+    }
+    
+    .tab-pane-text {
+        /* NEU: Weist dem Text die erste Position zu */
+        order: 1; 
+    }
+
+    .tab-pane-image {
+        /* NEU: Weist dem Bild die zweite Position zu */
+        order: 2; 
+        padding: 0 20px 20px 20px; /* Passt den Puffer für die untere Position an */
     }
 }
