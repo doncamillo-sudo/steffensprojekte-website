@@ -91,8 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Höhe beim Laden und bei Größenänderung des Fensters anpassen
-        window.addEventListener('load', alignTabHeight);
+        document.fonts.ready.then(() => {
+            alignTabHeight();
+        });
+        
+        // Passt die Höhe weiterhin an, wenn die Fenstergröße geändert wird.
         window.addEventListener('resize', alignTabHeight);
+        
     }
 });
