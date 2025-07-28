@@ -99,4 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', alignTabHeight);
         
     }
+
+     // --- Accordion-Funktionalität ---
+     const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+     accordionHeaders.forEach(header => {
+         header.addEventListener('click', () => {
+             const activeItem = document.querySelector('.accordion-item.active');
+             const clickedItem = header.parentElement;
+ 
+             // Wenn ein anderes Item offen ist, schließe es
+             if (activeItem && activeItem !== clickedItem) {
+                 activeItem.classList.remove('active');
+             }
+ 
+             // Öffne oder schließe das geklickte Item
+             clickedItem.classList.toggle('active');
+         });
+     });
 });
