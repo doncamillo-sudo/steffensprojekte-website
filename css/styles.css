@@ -1051,6 +1051,7 @@ textarea {
 
     .sticky-phone-button {
         display: flex;
+    }
 }
 
 /* Breakpoint 2: Tablet Portrait (992px) - Hero-Box und Video werden mobil */
