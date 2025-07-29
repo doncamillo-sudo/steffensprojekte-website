@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <script>
+        // Verhindert, dass der Browser die letzte Scroll-Position wiederherstellt
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        // Setzt die Scroll-Position beim Laden der Seite auf ganz oben
+        window.scrollTo(0, 0);
+    </script>
     <header class="main-header">
         <div class="container">
             <nav class="navbar">
