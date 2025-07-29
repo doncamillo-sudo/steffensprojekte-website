@@ -117,4 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
              clickedItem.classList.toggle('active');
          });
      });
+
+    const phoneButton = document.querySelector('.sticky-phone-button');
+
+    // Timer, um den Button nach 5 Sekunden zu erweitern
+    setTimeout(() => {
+        phoneButton.classList.add('expanded');
+
+        // Optional: Timer, um den Button nach weiteren 4 Sekunden wieder einzuklappen
+        setTimeout(() => {
+            phoneButton.classList.remove('expanded');
+        }, 4000); // 4000ms = 4 Sekunden
+
+    }, 5000); // 5000ms = 5 Sekunden
 });
