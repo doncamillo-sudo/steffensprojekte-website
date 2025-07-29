@@ -958,8 +958,6 @@ textarea {
     bottom: 30px;
     right: 30px;
     z-index: 1001;
-
-    display: inline-flex;
     padding: 18px;
 
     /* NEU: Startwert für den Abstand */
@@ -1006,6 +1004,58 @@ textarea {
 .sticky-phone-button.expanded .phone-text {
     max-width: 150px; /* Gibt dem Text Platz */
     opacity: 1;
+}
+
+/* --- Styling für Rechtstexte (Impressum, Datenschutz) --- */
+.legal-content {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    max-width: 800px; /* Begrenzt die Breite für bessere Lesbarkeit */
+}
+
+.legal-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--text-color-dark);
+    font-weight: 500;
+}
+
+.legal-content h2 {
+    font-size: 1.8em;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.legal-content h3 {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--text-color-dark);
+}
+
+.legal-content p, 
+.legal-content li {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.legal-content a {
+    color: var(--brand-orange);
+    text-decoration: underline;
+}
+
+.legal-content a:hover {
+    text-decoration: none;
+}
+
+.legal-content ul {
+    list-style-position: inside;
+    padding-left: 10px;
 }
 
 /* Breakpoint 1: Tablet Landscape (1100px) - NUR die Navigation wird mobil */
@@ -1331,6 +1381,11 @@ textarea {
     .footer-bottom {
         flex-direction: column-reverse; /* Copyright kommt nach oben */
         gap: 20px;
+    }
+
+    .footer-nav ul {
+        flex-wrap: wrap; /* Erlaubt den Umbruch */
+        justify-content: center; /* Zentriert die Links */
     }
 }
 
