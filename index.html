@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -349,7 +350,8 @@
                         <h2 class="section-title">Unverbindlich anfragen –<br>wir kümmern uns um den Rest</h2>
                         <p>Ob konkrete Anfrage oder erste Beratung – wir freuen uns auf Ihre Nachricht. Unser Team ist im gesamten Vorderhunsrück und Großraum Koblenz für Sie im Einsatz.</p>
         
-                        <form action="#" method="POST" class="contact-form">
+                        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                            <input type="hidden" name="access_key" value="511eff22-91ff-4e0b-8f6b-65b17348defd">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="vorname">Vorname</label>
@@ -384,6 +386,7 @@
                                 <label for="nachricht">Ihre Nachricht</label>
                                 <textarea id="nachricht" name="nachricht" rows="5" required></textarea>
                             </div>
+                            <div class="g-recaptcha" data-sitekey="6LdWfpUrAAAAAOLEPUMRIF--k4oOox1-3aHVVpkV"></div>
                             <button type="submit" class="btn btn-primary">Jetzt kostenloses Angebot anfordern</button>
                         </form>
                     </div>
